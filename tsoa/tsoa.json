@@ -1,0 +1,2293 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"User": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"email",
+					"username"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserAndCredentials": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/User"
+					},
+					"token": {
+						"type": "string"
+					},
+					"refresh": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user",
+					"token",
+					"refresh"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserCreationParams": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"name",
+					"username",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginParams": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RefreshParams": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"refreshToken": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"refreshToken"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockAccountResult": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockAccountParams": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"blockedAccountID": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userID",
+					"blockedAccountID"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PostType": {
+				"enum": [
+					"post",
+					"repost",
+					"reply"
+				],
+				"type": "string"
+			},
+			"PostForGetBookmarkResult": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/PostType"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"attachmentId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"text",
+					"type",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetBookmarksResult": {
+				"properties": {
+					"bookmarks": {
+						"items": {
+							"$ref": "#/components/schemas/PostForGetBookmarkResult"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"bookmarks"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FlattenMaps_T_": {
+				"properties": {},
+				"type": "object"
+			},
+			"BookmarksDocument": {
+				"$ref": "#/components/schemas/FlattenMaps_T_"
+			},
+			"AddToBookmarkResult": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/User"
+					},
+					"bookmarks": {
+						"items": {
+							"$ref": "#/components/schemas/BookmarksDocument"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"user",
+					"bookmarks"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserPostToBookmark": {
+				"properties": {
+					"postID": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"postID"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserBookmarksCreationParams": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"categoryName": {
+						"type": "string"
+					},
+					"postToBookmark": {
+						"$ref": "#/components/schemas/UserPostToBookmark"
+					}
+				},
+				"required": [
+					"userID",
+					"categoryName",
+					"postToBookmark"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PostDocument": {
+				"$ref": "#/components/schemas/FlattenMaps_T_"
+			},
+			"UserBookmarkQueryResult": {
+				"properties": {
+					"result": {
+						"items": {
+							"$ref": "#/components/schemas/PostDocument"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserBookmarkQueryFailedResult": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteBookmarkResult": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserBookmarksDeleteParams": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"categoryName": {
+						"type": "string"
+					},
+					"postToDelete": {
+						"$ref": "#/components/schemas/UserPostToBookmark"
+					}
+				},
+				"required": [
+					"userID",
+					"categoryName",
+					"postToDelete"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ArchivedCategoryResult": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ArchiveBookmarkCategoryParam": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"categoryName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userID",
+					"categoryName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteBookmarkCategoryParam": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"categoryName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userID",
+					"categoryName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Follow": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"followerUserId": {
+						"type": "string"
+					},
+					"followingUserId": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"following": {
+						"$ref": "#/components/schemas/User"
+					},
+					"follower": {
+						"$ref": "#/components/schemas/User"
+					}
+				},
+				"required": [
+					"id",
+					"followerUserId",
+					"followingUserId",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FollowsResponse": {
+				"properties": {
+					"remainingCount": {
+						"type": "number",
+						"format": "double"
+					},
+					"remainingPages": {
+						"type": "number",
+						"format": "double"
+					},
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"follows": {
+						"items": {
+							"$ref": "#/components/schemas/Follow"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"remainingCount",
+					"remainingPages",
+					"count",
+					"follows"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InterestDocument": {
+				"$ref": "#/components/schemas/FlattenMaps_T_"
+			},
+			"UserAndInterests": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/User"
+					},
+					"interests": {
+						"items": {
+							"$ref": "#/components/schemas/InterestDocument"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"user",
+					"interests"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Interest": {
+				"properties": {
+					"interestName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"interestName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserInterestsCreationParams": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"interests": {
+						"items": {
+							"$ref": "#/components/schemas/Interest"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"userID",
+					"interests"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserMutedWordsResult": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserMutedWordParams": {
+				"properties": {
+					"userID": {
+						"type": "string"
+					},
+					"mutedWord": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userID",
+					"mutedWord"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PostModel": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/PostType"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"attachmentId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"userId",
+					"text",
+					"type",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreatePostParams": {
+				"properties": {
+					"text": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/PostType"
+					},
+					"originalPostId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"text",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ReactionType": {
+				"enum": [
+					"like"
+				],
+				"type": "string"
+			},
+			"ReactionModel": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"postId": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/ReactionType"
+					}
+				},
+				"required": [
+					"id",
+					"userId",
+					"postId",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateReactionParams": {
+				"properties": {
+					"type": {
+						"$ref": "#/components/schemas/ReactionType"
+					}
+				},
+				"required": [
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AttachmentModel": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"mimeType": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"mimeType"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Profile": {
+				"properties": {
+					"bio": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"website": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Post": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/PostType"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"attachmentId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"userId",
+					"text",
+					"type",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PostsResponse": {
+				"properties": {
+					"remainingCount": {
+						"type": "number",
+						"format": "double"
+					},
+					"remainingPages": {
+						"type": "number",
+						"format": "double"
+					},
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"posts": {
+						"items": {
+							"$ref": "#/components/schemas/Post"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"remainingCount",
+					"remainingPages",
+					"count",
+					"posts"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Reaction": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "string"
+					},
+					"postId": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/ReactionType"
+					}
+				},
+				"required": [
+					"id",
+					"userId",
+					"postId",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ReactionsResponse": {
+				"properties": {
+					"remainingCount": {
+						"type": "number",
+						"format": "double"
+					},
+					"remainingPages": {
+						"type": "number",
+						"format": "double"
+					},
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"reactions": {
+						"items": {
+							"$ref": "#/components/schemas/Reaction"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"remainingCount",
+					"remainingPages",
+					"count",
+					"reactions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PostStatsResponse": {
+				"properties": {
+					"reactionCount": {
+						"type": "number",
+						"format": "double"
+					},
+					"replyCount": {
+						"type": "number",
+						"format": "double"
+					},
+					"repostCount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"reactionCount",
+					"replyCount",
+					"repostCount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SetUsernameResponse": {
+				"properties": {
+					"user": {
+						"$ref": "#/components/schemas/User"
+					}
+				},
+				"required": [
+					"user"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SetUsernameParams": {
+				"properties": {
+					"username": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteUserResponse": {
+				"properties": {
+					"reactionsDeleted": {
+						"type": "number",
+						"format": "double"
+					},
+					"attachmentsDeleted": {
+						"type": "number",
+						"format": "double"
+					},
+					"postsDeleted": {
+						"type": "number",
+						"format": "double"
+					},
+					"profilesDeleted": {
+						"type": "number",
+						"format": "double"
+					},
+					"followsDeleted": {
+						"type": "number",
+						"format": "double"
+					},
+					"usersDeleted": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"reactionsDeleted",
+					"attachmentsDeleted",
+					"postsDeleted",
+					"profilesDeleted",
+					"followsDeleted",
+					"usersDeleted"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"jwt": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"info": {
+		"title": "twitter-clone-backend",
+		"version": "1.0.0",
+		"description": "Backend for twitter clone project",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Serticode"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/v1/auth/register": {
+			"post": {
+				"operationId": "registerUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserAndCredentials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/auth/login": {
+			"post": {
+				"operationId": "loginUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserAndCredentials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/auth/logout": {
+			"delete": {
+				"operationId": "logoutUser",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/v1/auth/refresh": {
+			"post": {
+				"operationId": "refreshUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserAndCredentials"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [
+					{
+						"jwt_without_verification": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RefreshParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/blockAccount/blockAccount": {
+			"post": {
+				"operationId": "blockAccount",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BlockAccountResult"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Block account"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BlockAccountParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/bookmarks/getBookmarks/{userID}": {
+			"get": {
+				"operationId": "getBookmarks",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/GetBookmarksResult"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/bookmarks/setBookmarks": {
+			"post": {
+				"operationId": "setBookmark",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/AddToBookmarkResult"
+										},
+										{
+											"type": "string"
+										}
+									]
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserBookmarksCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/bookmarks/searchBookmarks/{userID}/{searchQuery}": {
+			"get": {
+				"operationId": "searchBookmarks",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/UserBookmarkQueryResult"
+										},
+										{
+											"$ref": "#/components/schemas/UserBookmarkQueryFailedResult"
+										}
+									]
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "searchQuery",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/bookmarks/deleteBookmarks": {
+			"delete": {
+				"operationId": "deleteBookmarks",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteBookmarkResult"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserBookmarksDeleteParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/bookmarks/archiveBookmarkCategory": {
+			"post": {
+				"operationId": "archiveBookmarkCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ArchivedCategoryResult"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ArchiveBookmarkCategoryParam"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/bookmarks/deleteBookmarkCategory": {
+			"delete": {
+				"operationId": "deleteBookmarkCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteBookmarkResult"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Bookmarks"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteBookmarkCategoryParam"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/follow/{userId}": {
+			"post": {
+				"operationId": "followUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Follow"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "allows a user to follow another user.",
+				"tags": [
+					"Follow"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/follow/unfollow/{userId}": {
+			"delete": {
+				"operationId": "unfollowUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Follow"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Deletes a follow relationship between two users.",
+				"tags": [
+					"Follow"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/follow/{userId}/following": {
+			"get": {
+				"operationId": "getUserFollowing",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FollowsResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves the list of users that the specified user is following.",
+				"tags": [
+					"Follow"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "resultsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/follow/{userId}/followers": {
+			"get": {
+				"operationId": "getUserFollowers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FollowsResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves the list of users that are following the specified user.",
+				"tags": [
+					"Follow"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "resultsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/interests/getInterests": {
+			"get": {
+				"operationId": "getInterests",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/InterestDocument"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Interests"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/v1/interests/setInterests": {
+			"post": {
+				"operationId": "setInterests",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserAndInterests"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Interests"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserInterestsCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/mutedWords/mutedWords": {
+			"post": {
+				"operationId": "mutedWords",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserMutedWordsResult"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request. Kindly check your header and body params"
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"tags": [
+					"Mute"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserMutedWordParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/posts": {
+			"post": {
+				"operationId": "createPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostModel"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": ""
+					},
+					"400": {
+						"description": "Original post ID is missing"
+					}
+				},
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePostParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/posts/react/like/{postId}": {
+			"post": {
+				"operationId": "reactToPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ReactionModel"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": ""
+					},
+					"404": {
+						"description": "Post not found"
+					}
+				},
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateReactionParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/posts/react/unlike/{postId}": {
+			"delete": {
+				"operationId": "unreactToPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ReactionModel"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Reaction not found"
+					}
+				},
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/posts/{postId}": {
+			"patch": {
+				"operationId": "attachToPost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AttachmentModel"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": ""
+					},
+					"404": {
+						"description": "Post not found"
+					},
+					"500": {
+						"description": "Could not attach photo to post"
+					}
+				},
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "deletePost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostModel"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Post not found"
+					}
+				},
+				"description": "* Deletes a post belonging to the current user.",
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/posts/attachment/{postId}": {
+			"get": {
+				"operationId": "getPostAttachment",
+				"responses": {
+					"200": {
+						"description": ""
+					},
+					"204": {
+						"description": "No content"
+					},
+					"404": {
+						"description": "Photo not found"
+					}
+				},
+				"description": "* Grabs an attachment from a post",
+				"tags": [
+					"Posts"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/profile/info/{userId}": {
+			"get": {
+				"operationId": "getProfile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Profile"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/profile/updateProfile": {
+			"post": {
+				"operationId": "setProfile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Profile"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Profile"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/profile/uploadPhoto": {
+			"post": {
+				"operationId": "setProfilePhoto",
+				"responses": {
+					"200": {
+						"description": ""
+					},
+					"204": {
+						"description": "No content"
+					},
+					"400": {
+						"description": "Invalid mime type"
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/v1/profile/photo/{userId}": {
+			"get": {
+				"operationId": "getProfilePhoto",
+				"responses": {
+					"200": {
+						"description": ""
+					},
+					"204": {
+						"description": "No content"
+					},
+					"404": {
+						"description": "Photo not found"
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/profile/deletePhoto": {
+			"delete": {
+				"operationId": "deleteProfilePhoto",
+				"responses": {
+					"200": {
+						"description": ""
+					},
+					"204": {
+						"description": "No content"
+					},
+					"404": {
+						"description": "Photo not found"
+					}
+				},
+				"tags": [
+					"Profile"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/v1/query/posts": {
+			"get": {
+				"operationId": "queryPosts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostsResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Retrieves posts with given parameters, with pagination.",
+				"tags": [
+					"Queries"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "userId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "resultsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/PostType"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/query/replies/{postId}": {
+			"get": {
+				"operationId": "getReplies",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostsResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Retrieves replies to a post with given parameters, with pagination.",
+				"tags": [
+					"Queries"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "resultsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/query/reactions/{userId}": {
+			"get": {
+				"operationId": "getReactions",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ReactionsResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Retrieves reactions made by a user, with pagination.",
+				"tags": [
+					"Queries"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "resultsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/query/stats/{postId}": {
+			"get": {
+				"operationId": "getPostStats",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PostStatsResponse"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					}
+				},
+				"description": "Retrieves stats for a post: number of reactions, replies and reposts.",
+				"tags": [
+					"Queries"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "postId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/v1/user/setUsername": {
+			"post": {
+				"operationId": "setUsername",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SetUsernameResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				},
+				"description": "Set the username of the authenticated user.",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SetUsernameParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/user/deleteUser": {
+			"delete": {
+				"operationId": "deleteUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteUserResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "deletes a user and all their data.",
+				"tags": [
+					"User"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

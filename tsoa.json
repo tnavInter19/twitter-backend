@@ -1,0 +1,21 @@
+{
+  "entryFile": "./app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["./controllers/**/*_controller.ts"],
+  "spec": {
+    "outputDirectory": "./tsoa/",
+    "specVersion": 3,
+    "specFileBaseName": "tsoa",
+    "securityDefinitions": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "routes": {
+    "routesDir": "./routes",
+    "authenticationModule": "./middleware/authentication.ts"
+  }
+}
